@@ -18,6 +18,7 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: default
       containers:
         - name: backend
           image:  public.ecr.aws/r0h6p1y8/lcr/eks:latest
