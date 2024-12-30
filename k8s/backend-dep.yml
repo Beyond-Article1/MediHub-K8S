@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
+  namespace: dev
 spec:
   replicas: 2
   strategy:
@@ -29,6 +30,7 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-db-config
                   key: mariadb.host
+                  namespace: kube-system
             - name: mariadb.port
               valueFrom:
                 secretKeyRef:

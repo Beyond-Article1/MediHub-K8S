@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret-provider-binding
+  namespace: dev
+subjects:
+  - kind: ServiceAccount
+    name: default  # 사용 중인 서비스 계정
+    namespace: dev
+roleRef:
+  kind: Role
+  name: secret-provider-access
+  apiGroup: rbac.authorization.k8s.io
