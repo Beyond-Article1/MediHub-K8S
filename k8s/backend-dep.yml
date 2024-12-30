@@ -30,7 +30,6 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-db-config
                   key: mariadb.host
-                  namespace: kube-system
             - name: mariadb.port
               valueFrom:
                 secretKeyRef:
