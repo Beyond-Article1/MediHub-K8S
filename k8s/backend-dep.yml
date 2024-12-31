@@ -18,188 +18,129 @@ spec:
       labels:
         app: backend
     spec:
-      serviceAccountName: default
       containers:
         - name: backend
           image:  public.ecr.aws/r0h6p1y8/lcr/eks:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
+          env:
+            - name: mariadb.host
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: mariadb.host
+            - name: mariadb.port
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: mariadb.port
+            - name: db.name
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: db.name
+            - name: db.password
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: db.password
+            - name: mongodb.host
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: mongodb.host
+            - name: mongodb.port
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: mongodb.port
+            - name: redis.host
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: redis.host
+            - name: redis.port
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-db-config
+                  key: redis.port
 
-          volumeMounts:
-            - name: db-config-volume
-              mountPath: "/mnt/secrets-store/db-config"
-              readOnly: true
-            - name: openai-config-volume
-              mountPath: "/mnt/secrets-store/openai-config"
-              readOnly: true
-            - name: s3-config-volume
-              mountPath: "/mnt/secrets-store/s3-config"
-              readOnly: true
-            - name: elasticsearch-config-volume
-              mountPath: "/mnt/secrets-store/elasticsearch-config"
-              readOnly: true
-            - name: newsapi-config-volume
-              mountPath: "/mnt/secrets-store/newsapi-config"
-              readOnly: true
-            - name: other-config-volume
-              mountPath: "/mnt/secrets-store/other-config"
-              readOnly: true
-          volumes:
-            - name: db-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-db-config"
-            - name: openai-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-openai-config"
-            - name: s3-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-s3-config"
-            - name: elasticsearch-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-elasticsearch-config"
-            - name: newsapi-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-newsapi-config"
-            - name: other-config-volume
-              csi:
-                driver: secrets-store.csi.k8s.io
-                readOnly: true
-                volumeAttributes:
-                  secretProviderClass: "aws-secrets-manager-other-config"
-#          env:
-#            - name: mariadb.host
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: mariadb.host
-#            - name: mariadb.port
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: mariadb.port
-#            - name: db.name
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: db.name
-#            - name: db.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: db.password
-#            - name: mongodb.host
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: mongodb.host
-#            - name: mongodb.port
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: mongodb.port
-#            - name: redis.host
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: redis.host
-#            - name: redis.port
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-db-config
-#                  key: redis.port
-#
-#            - name: openai.api.key
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-openai-config
-#                  key: openai.api.key
-#            - name: openai.model
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-openai-config
-#                  key: openai.model
-#            - name: openai.api.url
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-openai-config
-#                  key: openai.api.url
-#            - name: openai.api.key.bot
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-openai-config
-#                  key: openai.api.key.bot
-#
-#            - name: s3.credentials.access-key
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-s3-config
-#                  key: s3.credentials.access-key
-#            - name: s3.credentials.secret-key
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-s3-config
-#                  key: s3.credentials.secret-key
-#            - name: s3.credentials.region
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-s3-config
-#                  key: s3.credentials.region
-#            - name: s3.bucket
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-s3-config
-#                  key: s3.bucket
-#
-#            - name: elastic_uris
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-elasticsearch-config
-#                  key: elastic_uris
-#            - name: elastic_user
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-elasticsearch-config
-#                  key: elastic_user
-#            - name: elastic_password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-elasticsearch-config
-#                  key: elastic_password
-#
-#            - name: newsapi.api-key
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-newsapi-config
-#                  key: newsapi.api-key
-#            - name: newsapi.base-url
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-newsapi-config
-#                  key: newsapi.base-url
-#
-#            - name: SECRET_KEY
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-other-config
-#                  key: SECRET_KEY
-#            - name: user.default-password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: aws-secrets-manager-other-config
-#                  key: user.default-password
+            - name: openai.api.key
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-openai-config
+                  key: openai.api.key
+            - name: openai.model
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-openai-config
+                  key: openai.model
+            - name: openai.api.url
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-openai-config
+                  key: openai.api.url
+            - name: openai.api.key.bot
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-openai-config
+                  key: openai.api.key.bot
+
+            - name: s3.credentials.access-key
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-s3-config
+                  key: s3.credentials.access-key
+            - name: s3.credentials.secret-key
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-s3-config
+                  key: s3.credentials.secret-key
+            - name: s3.credentials.region
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-s3-config
+                  key: s3.credentials.region
+            - name: s3.bucket
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-s3-config
+                  key: s3.bucket
+
+            - name: elastic_uris
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-elasticsearch-config
+                  key: elastic_uris
+            - name: elastic_user
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-elasticsearch-config
+                  key: elastic_user
+            - name: elastic_password
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-elasticsearch-config
+                  key: elastic_password
+
+            - name: newsapi.api-key
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-newsapi-config
+                  key: newsapi.api-key
+            - name: newsapi.base-url
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-newsapi-config
+                  key: newsapi.base-url
+
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-other-config
+                  key: SECRET_KEY
+            - name: user.default-password
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-other-config
