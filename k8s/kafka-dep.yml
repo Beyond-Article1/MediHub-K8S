@@ -18,8 +18,11 @@ spec:
           image: bitnami/kafka:latest
           ports:
             - containerPort: 9092
+              name: kafka-port-9092  # 이름 추가
             - containerPort: 9093
+              name: kafka-port-9093  # 이름 추가
             - containerPort: 10000
+              name: kafka-port-10000  # 이름 추가
           env:
             - name: KAFKA_CFG_LISTENERS
               value: "PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:10000"
@@ -34,6 +37,10 @@ metadata:
 spec:
   ports:
     - port: 9092
+      targetPort: 9092
+      name: kafka-port-9092  # 이름 추가
     - port: 10000
+      targetPort: 10000
+      name: kafka-port-10000  # 이름 추가
   selector:
     app: kafka
