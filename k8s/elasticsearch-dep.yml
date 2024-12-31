@@ -32,9 +32,9 @@ spec:
               value: "false"
           ports:
             - containerPort: 9200
-              name: elasticsearch-9200  # 이름 수정 (15자 이하)
+              name: es-9200  # 포트 이름을 15자 이하로 수정
             - containerPort: 9300
-              name: elasticsearch-9300  # 이름 수정 (15자 이하)
+              name: es-9300  # 포트 이름을 15자 이하로 수정
       nodeSelector:
         purpose: custom
 ---
@@ -47,9 +47,9 @@ spec:
   ports:
     - port: 9200
       targetPort: 9200
-      name: elasticsearch-9200  # 이름 수정 (15자 이하)
+      name: es-9200  # 포트 이름을 15자 이하로 수정
     - port: 9300
       targetPort: 9300
-      name: elasticsearch-9300  # 이름 수정 (15자 이하)
+      name: es-9300  # 포트 이름을 15자 이하로 수정
   selector:
     app: elasticsearch
