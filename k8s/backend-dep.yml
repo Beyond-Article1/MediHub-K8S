@@ -144,3 +144,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: aws-secrets-manager-other-config
+                  key: user.default-password
