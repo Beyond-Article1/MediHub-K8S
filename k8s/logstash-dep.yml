@@ -18,6 +18,8 @@ spec:
           ports:
             - containerPort: 5000
             - containerPort: 9600
+      nodeSelector:
+        purpose: custom
 ---
 apiVersion: v1
 kind: Service

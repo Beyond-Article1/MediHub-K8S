@@ -40,3 +40,5 @@ spec:
                   key: db.password
           ports:
             - containerPort: 27017
+      nodeSelector:
+        purpose: custom

@@ -145,3 +145,5 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-other-config
                   key: user.default-password
+      nodeSelector:
+        purpose: custom
