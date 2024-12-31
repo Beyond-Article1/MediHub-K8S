@@ -32,9 +32,9 @@ spec:
               value: "false"
           ports:
             - containerPort: 9200
-              name: elasticsearch-port-9200  # 이름 추가
+              name: elasticsearch-9200  # 이름 수정 (15자 이하)
             - containerPort: 9300
-              name: elasticsearch-port-9300  # 이름 추가
+              name: elasticsearch-9300  # 이름 수정 (15자 이하)
       nodeSelector:
         purpose: custom
 ---
@@ -47,9 +47,9 @@ spec:
   ports:
     - port: 9200
       targetPort: 9200
-      name: elasticsearch-port-9200  # 이름 추가
+      name: elasticsearch-9200  # 이름 수정 (15자 이하)
     - port: 9300
       targetPort: 9300
-      name: elasticsearch-port-9300  # 이름 추가
+      name: elasticsearch-9300  # 이름 수정 (15자 이하)
   selector:
     app: elasticsearch
