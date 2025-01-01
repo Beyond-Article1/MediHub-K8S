@@ -11,6 +11,11 @@ metadata:
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type":"redirect","RedirectConfig":{"Protocol":"HTTPS","Port":"443","StatusCode":"HTTP_301"}}'
     kubernetes.io/ingress.class: alb                                               # Ingress Controller를 ALB로 지정
     alb.ingress.kubernetes.io/rewrite-target: /  # 경로를 백엔드 서비스의 루트로 리다이렉트
+    alb.ingress.kubernetes.io/healthcheck-path: "/health"  # 헬스 체크 경로를 /health로 설정
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"  # 헬스 체크 주기를 30초로 설정
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"  # 헬스 체크 타임아웃을 5초로 설정
+    alb.ingress.kubernetes.io/healthcheck-unhealthy-threshold: "2"  # 헬스 체크 실패 임계값을 2로 설정
+    alb.ingress.kubernetes.io/healthcheck-healthy-threshold: "3"  # 헬스 체크 성공 임계값을 3으로 설정
 spec:
   rules:
     - host: api.medihub.info                                                       # 도메인 설정
@@ -23,3 +28,10 @@ spec:
                 name: backend                                                      # Service 이름
                 port:
                   number: 80                                                       # Service의 포트
+          - path: /health  # /health 경로를 별도로 추가
+            pathType: Exact
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80

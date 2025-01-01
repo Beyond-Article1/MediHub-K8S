@@ -150,5 +150,13 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-other-config
                   key: user.default-password
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
       nodeSelector:
         purpose: custom
