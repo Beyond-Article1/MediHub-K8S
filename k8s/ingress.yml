@@ -15,7 +15,7 @@ spec:
     - host: api.medihub.info                                                       # 도메인 설정
       http:
         paths:
-          - path: /api(/|$)(.*)                                                    # 모든 경로 처리
+          - path: /api/*                                                    # 모든 경로 처리
             pathType: ImplementationSpecific
             backend:
               service:
