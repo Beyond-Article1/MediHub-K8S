@@ -151,12 +151,5 @@ spec:
                   name: aws-secrets-manager-other-config
                   key: user.default-password
 
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8088
-            initialDelaySeconds: 60
-            periodSeconds: 10
-
       nodeSelector:
         purpose: custom
