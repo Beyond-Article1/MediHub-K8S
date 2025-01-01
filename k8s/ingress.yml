@@ -7,7 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing                              # ALB를 인터넷에서 접근 가능하도록 설정
     alb.ingress.kubernetes.io/target-type: ip                                     # 타겟 유형 설정 (IP 모드)
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'                    # ALB의 HTTPS 포트 설정
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:905418052095:certificate/8ea660bc-c41b-4b7e-9942-c5c87a35b83a         # ACM 인증서 ARN 지정
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:905418052095:certificate/8cd23ee7-6a0a-4cab-8625-c89d355d8b16         # ACM 인증서 ARN 지정
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type":"redirect","RedirectConfig":{"Protocol":"HTTPS","Port":"443","StatusCode":"HTTP_301"}}'
     kubernetes.io/ingress.class: alb                                               # Ingress Controller를 ALB로 지정
 spec:
