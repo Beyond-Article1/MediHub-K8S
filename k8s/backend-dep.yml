@@ -123,6 +123,11 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-elasticsearch-config
                   key: elastic_password
+            - name: logstash_host_name
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-elasticsearch-config
+                  key: logstash_host_name
 
             - name: newsapi.api-key
               valueFrom:
