@@ -23,7 +23,7 @@ spec:
                 name: backend                                                      # Service 이름
                 port:
                   number: 80                                                       # Service의 포트
-          - path: /health  # /health 경로를 별도로 추가
+          - path: /actuator/health  # /health 경로를 별도로 추가
             pathType: Exact
             backend:
               service:
