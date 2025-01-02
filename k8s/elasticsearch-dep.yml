@@ -26,6 +26,8 @@ spec:
             - mountPath: /usr/share/elasticsearch/data
               name: elasticsearch-storage
           env:
+            - name: discovery.seed_hosts
+              value: "elasticsearch"
             - name: discovery.type
               value: single-node
             - name: ES_JAVA_OPTS
@@ -34,9 +36,9 @@ spec:
               value: "false"
           ports:
             - containerPort: 9200
-              name: es-9200  # 포트 이름을 15자 이하로 수정
+              name: elasticsearch-port-9200  # 이름 추가
             - containerPort: 9300
-              name: es-9300  # 포트 이름을 15자 이하로 수정
+              name: elasticsearch-port-9300  # 이름 추가
       nodeSelector:
         purpose: custom
 ---
@@ -49,9 +51,9 @@ spec:
   ports:
     - port: 9200
       targetPort: 9200
-      name: es-9200  # 포트 이름을 15자 이하로 수정
+      name: elasticsearch-port-9200  # 이름 추가
     - port: 9300
       targetPort: 9300
-      name: es-9300  # 포트 이름을 15자 이하로 수정
+      name: elasticsearch-port-9300  # 이름 추가
   selector:
     app: elasticsearch
