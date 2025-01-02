@@ -26,8 +26,6 @@ spec:
             - mountPath: /usr/share/elasticsearch/data
               name: elasticsearch-storage
           env:
-            - name: discovery.seed_hosts
-              value: "elasticsearch"
             - name: discovery.type
               value: single-node
             - name: ES_JAVA_OPTS
