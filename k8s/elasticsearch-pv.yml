@@ -10,4 +10,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: gp2
   hostPath:
-    path: /mnt/data/elasticsearch
+    path: /usr/share/elasticsearch/data
