@@ -13,8 +13,6 @@ spec:
       labels:
         app: elasticsearch
     spec:
-      securityContext:
-        fsGroup: 1000  # Elasticsearch의 UID/GID에 맞는 값으로 설정
       volumes:
         - name: elasticsearch-storage
           persistentVolumeClaim:
