@@ -150,6 +150,11 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-other-config
                   key: user.default-password
+            - name: socket.api
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets-manager-other-config
+                  key: socket.api
 
       nodeSelector:
         purpose: custom
