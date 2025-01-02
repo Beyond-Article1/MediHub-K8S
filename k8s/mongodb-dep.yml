@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: mongodb
   namespace: dev
+
 spec:
   replicas: 1
   selector:
@@ -39,7 +40,11 @@ spec:
                 secretKeyRef:
                   name: aws-secrets-manager-db-config
                   key: db.password
+            - name: TZ
+              value: Asia/Seoul
+
           ports:
             - containerPort: 27017
+
       nodeSelector:
         purpose: custom
