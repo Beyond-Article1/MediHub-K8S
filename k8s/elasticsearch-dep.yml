@@ -18,6 +18,14 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       initContainers: # Init Container 추가
+        - name: fix-permissions
+          image: busybox
+          command: ['sh', '-c', 'chown -R 1000:1000 /usr/share/elasticsearch/data']
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: elasticsearch-data
+              mountPath: /usr/share/elasticsearch/data
         - name: install-plugins
           image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
           command:
