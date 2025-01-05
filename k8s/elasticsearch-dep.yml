@@ -26,17 +26,17 @@ spec:
           volumeMounts:
             - name: elasticsearch-data
               mountPath: /usr/share/elasticsearch/data
-        - name: install-plugins
-          image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
-          command:
-            - sh
-            - -c
-            - |
-              elasticsearch-plugin install --batch analysis-nori
-              chown -R 1000:1000 /usr/share/elasticsearch/plugins
-          volumeMounts:
-            - mountPath: /usr/share/elasticsearch/plugins
-              name: elasticsearch-plugins
+#        - name: install-plugins
+#          image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+#          command:
+#            - sh
+#            - -c
+#            - |
+#              elasticsearch-plugin install --batch analysis-nori
+#              chown -R 1000:1000 /usr/share/elasticsearch/plugins
+#          volumeMounts:
+#            - mountPath: /usr/share/elasticsearch/plugins
+#              name: elasticsearch-plugins
       containers:
         - name: elasticsearch
           image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
