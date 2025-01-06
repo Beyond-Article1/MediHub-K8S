@@ -4,7 +4,7 @@ metadata:
   name: backend
   namespace: dev
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -27,7 +27,7 @@ spec:
           env:
             - name: TZ
               value: "Asia/Seoul"
-            
+
             - name: mariadb.host
               valueFrom:
                 secretKeyRef:
