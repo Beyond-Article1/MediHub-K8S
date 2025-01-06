@@ -25,6 +25,9 @@ spec:
           ports:
             - containerPort: 8088
           env:
+            - name: TZ
+              value: "Asia/Seoul"
+            
             - name: mariadb.host
               valueFrom:
                 secretKeyRef:
