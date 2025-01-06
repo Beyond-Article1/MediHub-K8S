@@ -17,8 +17,8 @@ spec:
     - host: api.medihub.info                                                       # 도메인 설정
       http:
         paths:
-          - path: /swagger-ui      # Swagger UI 경로 추가
-            pathType: Prefix
+          - path: /swagger-ui/*      # Swagger UI 경로 추가
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: backend
