@@ -41,7 +41,7 @@ spec:
                   name: aws-secrets-manager-db-config
                   key: db.password
             - name: TZ
-              value: Asia/Seoul
+              value: "Asia/Seoul"
 
           ports:
             - containerPort: 27017
